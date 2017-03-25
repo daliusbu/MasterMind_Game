@@ -46,6 +46,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblConnection = new System.Windows.Forms.Label();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.txtLaikas = new System.Windows.Forms.TextBox();
+            this.txtBandymai = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +87,7 @@
             this.txtGen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtGen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtGen.ForeColor = System.Drawing.Color.Chocolate;
-            this.txtGen.Location = new System.Drawing.Point(12, 403);
+            this.txtGen.Location = new System.Drawing.Point(12, 406);
             this.txtGen.Name = "txtGen";
             this.txtGen.Size = new System.Drawing.Size(100, 15);
             this.txtGen.TabIndex = 8;
@@ -230,12 +235,65 @@
             this.label4.Text = "Įveskite skaičių";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // lblConnection
+            // 
+            this.lblConnection.AutoSize = true;
+            this.lblConnection.Location = new System.Drawing.Point(214, 370);
+            this.lblConnection.Name = "lblConnection";
+            this.lblConnection.Size = new System.Drawing.Size(46, 17);
+            this.lblConnection.TabIndex = 24;
+            this.lblConnection.Text = "label5";
+            this.lblConnection.Click += new System.EventHandler(this.lblConnection_Click);
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.btnRegister.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRegister.Location = new System.Drawing.Point(203, 226);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(145, 45);
+            this.btnRegister.TabIndex = 25;
+            this.btnRegister.Text = "Registruotis";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // txtLaikas
+            // 
+            this.txtLaikas.Location = new System.Drawing.Point(142, 403);
+            this.txtLaikas.Name = "txtLaikas";
+            this.txtLaikas.Size = new System.Drawing.Size(100, 22);
+            this.txtLaikas.TabIndex = 26;
+            this.txtLaikas.TextChanged += new System.EventHandler(this.txtLaikas_TextChanged);
+            // 
+            // txtBandymai
+            // 
+            this.txtBandymai.Location = new System.Drawing.Point(296, 403);
+            this.txtBandymai.Name = "txtBandymai";
+            this.txtBandymai.Size = new System.Drawing.Size(100, 22);
+            this.txtBandymai.TabIndex = 27;
+            // 
+            // button1
+            // 
+            this.button1.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.button1.Location = new System.Drawing.Point(305, 133);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // MasterMind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(672, 437);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtBandymai);
+            this.Controls.Add(this.txtLaikas);
+            this.Controls.Add(this.btnRegister);
+            this.Controls.Add(this.lblConnection);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -281,6 +339,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblConnection;
+        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.TextBox txtLaikas;
+        private System.Windows.Forms.TextBox txtBandymai;
+        private System.Windows.Forms.Button button1;
     }
 }
 

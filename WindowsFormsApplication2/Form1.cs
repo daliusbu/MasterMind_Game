@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 
 namespace WindowsFormsApplication2
@@ -20,19 +21,32 @@ namespace WindowsFormsApplication2
             InitializeComponent();
         }
 
-        int skaitDydis = 4;
-        int skaitMax = 9999;
-        int count = 1;     // count = bandymu speti kiekis
+        private void MasterMind_Load(object sender, EventArgs e)
+        {
+        }
+
+        int skaitDydis = 4;     //pradinis skaitmenu kiekis
+        int skaitMax = 9999;    //pradinis didziausias galimas skaicius
+        int count = 1;          //pradinis bandymu speti kiekis
+        string laikas;          //laiko kintamasis
+        public string timeFinal = "00:13";  //galutinis laiko rezultatas
+        public string countFinal = "4";     //galutinis bandymu skaicius
+        private Stopwatch stopWatch;    // Taimerio objekto deklaravimas
 
 
+        //string laikas2 = txtLaikas
 
+                    //RADIO BUTTONS
+
+        //Radio button 6 -> ijungia 6 skaitmenu skaiciaus zaidima
         private void radio6_CheckedChanged(object sender, EventArgs e)
         {
             skaitDydis = 6;
             skaitMax = 999999;
             MessageBox.Show("Paspauskite mygtuka 'Pradeti'");
-
         }
+
+        //Radio button 4 -> ijungia 6 skaitmenu skaiciaus zaidima
         private void radio4_CheckedChanged(object sender, EventArgs e)
         {
             if (skaitDydis == 6)
@@ -41,8 +55,110 @@ namespace WindowsFormsApplication2
                 skaitMax = 9999;
                 lstItems.Text = "";
             }
-
         }
+
+                        // BUTTONS
+
+        // Mygtukas "Pradeti"
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Istrinam visu langu turini ir nuresetinam laikmati
+            lstItems.Items.Clear();
+            txtResult.Text = "";
+            txtResult2.Text = "";
+            txtGuess.Text = "";
+            _ticks = 0;
+            count = 1;     // count = bandymu speti kiekis
+
+            HashSet<int> setas1 = skaiciausGeneratorius();
+            var outGen = string.Join("", setas1);
+            txtGen.Text = outGen;
+            stopWatch = new Stopwatch();
+            stopWatch.Start();
+            timer1.Start();
+            txtGuess.Select();
+        }
+
+        // Mygtukas "Tikrinti"
+        private void compareNum(object sender, EventArgs e)
+        {
+            AcceptButton = compare;
+            txtGuess.Select(); // permeta kursoriu i spejimo lageli
+
+            // patikrinam ar kas nors ivesta 
+            if (txtGen.Text == "")
+            {
+                MessageBox.Show("Paspauskite mygtuka 'Pradeti'");
+            }
+
+            // patikrinam ar teisingo ilgio ivestas skaicius
+            else if (txtGuess.Text.Length == skaitDydis)
+            {
+                string a = txtGuess.Text;
+                string b = txtGen.Text;
+
+                // patikrinam ar ivestas skaicius sutampa su sugeneruotu
+                if (a == b)
+                {
+                    timer1.Stop();
+                    stopWatch.Stop();
+                    _ticks = 0;
+                    laikas = stopWatch.Elapsed.Minutes.ToString("00") + " : " + stopWatch.Elapsed.Seconds.ToString("00");
+                    string countFinal = count.ToString();
+                    txtLaikas.Text = laikas;
+                    txtBandymai.Text = countFinal;
+                    MessageBox.Show("Atspejote is " + countFinal + " bandymu" + "\nJusu laikas: " + laikas);
+
+                    // Sukuriamas registracijos Form2 objektas ir jis atidaroma registracijos formos langas
+                    registrationForm frm2 = new registrationForm();
+                    frm2.Show();
+                    count = 1;
+
+                }
+                else
+                // Tikrinam kiek skaitmenu yra sugeneruotame skaiciuje (n) ir kiek skaitmenu atitinka savo vieta (m)
+                {
+                    int n = 0; int m = 0;
+                    for (int i = 0; i < skaitDydis; i++)
+                    {
+                        if (b.Contains(a[i]))
+                        {
+                            n++;
+                        }
+                        if (a[i] == b[i])
+                        {
+                            m++;
+                        }
+                    }
+
+                    // I tarpiniu resulatatu langelius isvedame tarpinius rezultatus
+                    txtResult.Text = "Atspeta: " + n;
+                    txtResult2.Text = "Savo vietoje: " + m;
+
+                    // I visu resulatatu saraso langa isvedame tarpinius rezultatus
+                    lstItems.Items.Add(count + ".   " + a + "       " + n + " : " + m);
+
+                    // Istrinam spejimo langelio turini
+                    txtGuess.Text = "";
+
+                }
+                count++;
+            }
+            else
+            // Jeigu skaicius neteisingo ilgio, prasome ivesti teisingo ilgio skaiciu
+            {
+                MessageBox.Show("Iveskite " + skaitDydis + " skaitmenu skaiciu");
+            }
+        }
+
+        // Mygtukas Registruotis -> atidaro registracijos langą Form2
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            registrationForm frm2 = new registrationForm();
+            frm2.Show();
+        }
+
+                        //METODAI
 
         // Metodas Random Skaiciaus Generatorius
         private HashSet<int> skaiciausGeneratorius()
@@ -67,7 +183,8 @@ namespace WindowsFormsApplication2
             return masyvas;
         }
 
-        // Metodas laiko parodymui formos antrasteje
+
+        // Metodas laiko parodymui formos1 antrasteje
         private int _ticks = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -75,104 +192,27 @@ namespace WindowsFormsApplication2
             this.Text = _ticks.ToString();
         }
 
-        // Taimerio objekto deklaravimas (sukurimas metode zemiau)
-        private Stopwatch stopWatch;
 
-        // Metodas mygtukui "Pradeti"
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Istrinam visu langu turini ir nuresetinam laikmati
-            lstItems.Items.Clear();
-            txtResult.Text = "";
-            txtResult2.Text = "";
-            txtGuess.Text = "";
-            _ticks = 0;
-            count = 1;     // count = bandymu speti kiekis
+        //Metodas laiko isvedimas i placius vandenis
 
-            HashSet<int> setas1 = skaiciausGeneratorius();
-            var outGen = string.Join("", setas1);
-            txtGen.Text = outGen;
-            stopWatch = new Stopwatch();
-            stopWatch.Start();
-            timer1.Start();
-            txtGuess.Select();
+            public string LaikasBle()
+        { 
+            string naujasLaikas;
+            naujasLaikas = txtBandymai.Text;
+            return naujasLaikas;
         }
 
-        // Metodas mygtukui "Tikrinti"
 
-        private void compareNum(object sender, EventArgs e)
+                    // MENU FUNKCIJOS
+
+        // Menu punktas Help -> parodo zaidimo taisykles
+        private void zaistiDarKartaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AcceptButton = compare;
-            txtGuess.Select();
-            if (txtGen.Text == "")
-            {
-                MessageBox.Show("Paspauskite mygtuka 'Pradeti'");
-            }
-            else if (txtGuess.Text.Length == skaitDydis) // patikrina ar teisingo ilgio ivestas skaicius (gali buti ir kiti simboliai)
-            {
-                string a = txtGuess.Text;
-                string b = txtGen.Text;
-                if (a == b)
-                {
-                    timer1.Stop();
-                    stopWatch.Stop();
-
-                    MessageBox.Show("Atspejote is " + count + " bandymu" + "\nJusu laikas: " + stopWatch.Elapsed.Minutes.ToString("00") + " : " + stopWatch.Elapsed.Seconds.ToString("00"));
-                    count = 1;
-                    _ticks = 0;
-                }
-                else
-                {
-                    int n = 0; int m = 0;
-                    for (int i = 0; i < skaitDydis; i++)
-                    {
-                        if (b.Contains(a[i]))
-                        {
-                            n++;
-                        }
-                        if (a[i] == b[i])
-                        {
-                            m++;
-                        }
-                    }
-                    txtResult.Text = "Atspeta: " + n;
-                    txtResult2.Text = "Savo vietoje: " + m;
-                    lstItems.Items.Add(count + ".   " + a + "       " + n + " : " + m);
-                    txtGuess.Text = "";
-                    //txtGuess.;
-                }
-                count++;
-            }
-            else
-            {
-                MessageBox.Show("Iveskite " + skaitDydis + " skaitmenu skaiciu");
-            }
-
+            string help = "Žaidimo tikslas atspėti kompiuterio sugeneruotą skaičių. Tam reikia skirti kuo mažiau bandymų ir laiko.\nGalima pasirinkti 4-ių arba 6-ių skaitmenų skaičių. Visi skaitmenys skaičiuje yra skirtingi, t.y skaičiaus 1123 negali būti.\n\nSĖKMĖS!";
+            MessageBox.Show(help);
         }
 
-        // Nematomas sugeneruoto skaiciaus textBox
-        private void txtGen_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        // Rezultatu saraso langas 1
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        // Tarpinio rezultato langeliai 1 ir 2
-        private void txtResult_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void txtResult2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        // Metodas Menu punktas Exit
+        // Menu punktas Exit -> uzdaro visa programa
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Ar norite zaidima baigti?", "Zaidimo pabaigimas", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -180,32 +220,63 @@ namespace WindowsFormsApplication2
                 Application.Exit();
             }
         }
+        
 
-        private void MasterMind_Load(object sender, EventArgs e)
+                    //TEXT BOXAI, LABEL ir 
+
+        // Nematomas sugeneruoto skaiciaus textBox
+        private void txtGen_TextChanged(object sender, EventArgs e)
         {
-
         }
 
+        // Tarpinio rezultato langeliai 1 ir 2
+        private void txtResult_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtResult2_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        // Visu rezultatu saraso langas 1
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        //Spejimo ivedimo langas
         private void txtGuess_TextChanged(object sender, EventArgs e)
         {
-
         }
 
+        private void txtLaikas_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+      
         private void label1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void zaistiDarKartaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string help = "Žaidimo tikslas atspėti kompiuterio sugeneruotą skaičių. Tam reikia skirti kuo mažiau bandymų ir laiko.\nGalima pasirinkti 4-ių arba 6-ių skaitmenų skaičių. Visi skaitmenys skaičiuje yra skirtingi, t.y skaičiaus 1123 negali būti.\n\nSĖKMĖS!";
-
-            MessageBox.Show(help);
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
+        }
 
+        private void lblConnection_Click(object sender, EventArgs e)
+        {
+        }
+
+
+        //Pagalbines funkcijos
+
+        static void bandymas1()
+        {
+            txtGuess.Text = txtLaikas.Text;
+        }
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            txtGuess.Text = txtLaikas.Text;
         }
     }
 }
