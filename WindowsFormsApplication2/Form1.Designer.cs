@@ -46,6 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnSecret = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,11 +82,14 @@
             // 
             this.txtGen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtGen.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtGen.Font = new System.Drawing.Font("Modern No. 20", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGen.ForeColor = System.Drawing.Color.Chocolate;
-            this.txtGen.Location = new System.Drawing.Point(12, 406);
+            this.txtGen.Location = new System.Drawing.Point(248, 365);
             this.txtGen.Name = "txtGen";
-            this.txtGen.Size = new System.Drawing.Size(100, 15);
+            this.txtGen.Size = new System.Drawing.Size(100, 29);
             this.txtGen.TabIndex = 8;
+            this.txtGen.Text = "Paslaptis";
+            this.txtGen.Visible = false;
             this.txtGen.TextChanged += new System.EventHandler(this.txtGen_TextChanged);
             // 
             // compare
@@ -230,12 +234,27 @@
             this.label4.Text = "Įveskite skaičių";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // btnSecret
+            // 
+            this.btnSecret.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSecret.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSecret.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.btnSecret.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btnSecret.Location = new System.Drawing.Point(216, 357);
+            this.btnSecret.Name = "btnSecret";
+            this.btnSecret.Size = new System.Drawing.Size(159, 37);
+            this.btnSecret.TabIndex = 23;
+            this.btnSecret.Text = "Atskleisti paslaptį";
+            this.btnSecret.UseVisualStyleBackColor = false;
+            this.btnSecret.Click += new System.EventHandler(this.btnSecret_Click);
+            // 
             // MasterMind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(672, 437);
+            this.Controls.Add(this.btnSecret);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -281,6 +300,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnSecret;
     }
 }
 

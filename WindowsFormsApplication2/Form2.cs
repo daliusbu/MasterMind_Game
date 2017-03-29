@@ -15,20 +15,23 @@ namespace WindowsFormsApplication2
     {
         private string time;
         private string count;
+        private int skaitDydis;
 
         public registrationForm()
         {
             InitializeComponent();
         }
 
-        public registrationForm(string timeFinal, string countFinal)
+        // susikuriam konstruktoriu kad persuoti duomenis is Form1
+        public registrationForm(string timeFinal, string countFinal, int skaitDydis)
         {
             InitializeComponent();
             time = timeFinal;
             count = countFinal;
+            this.skaitDydis = skaitDydis;
         }
 
-        //Metodas kuris aktyvuojamas is karto atidarius formos langa
+        //parodom zaidejo pasiekimus
         private void regitrationForm_Load(object sender, EventArgs e)
         {
             label3.Text = time;
@@ -37,7 +40,7 @@ namespace WindowsFormsApplication2
 
         
         //Metodas aktyvuojmas paspaudus mygtuka Issaugoti
-        //perima sugaisto laiko ir atliktu bandymu skaiciaus kintamuosius is Form1, nuskaito textboxe ivesta varda ir aktyvuoja metoda DataTransfer. Pavykusio ar nepavykusio prisijungimo prie duombzes statusa parodo label lblConTest.
+        //paima zaidejo rezultatus, nuskaito textboxe ivesta varda ir aktyvuoja metoda DataTransfer. Pavykusio ar nepavykusio prisijungimo prie duombzes statusa parodo label lblConTest.
 
         private void btnIssaugoti_Click(object sender, EventArgs e)
         {
@@ -57,7 +60,7 @@ namespace WindowsFormsApplication2
             {
                 MasterMind frm1 = new MasterMind();
                 String name = txtVardas.Text;
-                string connSuccess = DataTransfer(name, time, count);
+                string connSuccess = DataTransfer(name, time, count, skaitDydis);
                 lblConTest.Text = connSuccess;
             }
         }
@@ -72,31 +75,49 @@ namespace WindowsFormsApplication2
         // Query1 ir myReader1 siuncia paskutinio zaidimo duomenis i duombaze
         // Query2 ir meReader2 gauna visu zaidimo rezultatus is duombazes
 
-        private string DataTransfer(string name, string time, string count)
+        private string DataTransfer(string name, string time, string count, int skaitDydis)
         {
+            string numberSize;
+            switch (skaitDydis)
+            {
+                case 4:
+                    numberSize = "user4";
+                    break;
+                case 6:
+                    numberSize = "user6";
+                    break;
+                default:
+                    numberSize = "user4";
+                    break;
+            }
             string pranesimas = "Connection Failed";
             string connectionString = "datasource=127.0.0.1; port=3306; username=root; password=;";
-            string Query1 = "INSERT INTO testuser.user4(Name, Time, Count) values ('" + name + "', '" + time + "', '" + count + "');";
-            string Query2 = "SELECT * FROM testuser.user4 order by Count asc, Time;";
+            string Query1 = "INSERT INTO testuser." + numberSize + " (Name, Time, Count) values ('" + name + "', '" + time + "', '" + count + "');";
+            string Query2 = "SELECT * FROM testuser." + numberSize +" order by Count asc, Time;";
 
             MySqlConnection con = new MySqlConnection(connectionString);
             MySqlCommand SendToDB = new MySqlCommand(Query1, con);
             MySqlCommand GetFromDB = new MySqlCommand(Query2, con);
             MySqlDataReader myReader1;
             MySqlDataReader myReader2;
+
+            //con.Open();
+            try
             {
                 con.Open();
                 myReader1 = SendToDB.ExecuteReader();
                 con.Close();
                 con.Open();
                 myReader2 = GetFromDB.ExecuteReader();
-
-                for (int i = 0; i < 10; i++) // Parodo 5 geriausiu rezultatu
+           
+                // i ekrana isvedame 10 geriausiu rezultatu
+                int num = 1;
+                while(myReader2.Read() &&  num < 11)
                 {
-                    string nr = Convert.ToString(i + 1);
-                    myReader2.Read();
+                    string nr = Convert.ToString(num);
                     listNames.Items.Add("  " + nr + ".  " + myReader2[1]);
                     listScores.Items.Add("     " + myReader2[3] + "         " + myReader2[2]);
+                    num ++;
                 }
                                
                 if (con.State == ConnectionState.Open)
@@ -104,32 +125,28 @@ namespace WindowsFormsApplication2
                     pranesimas = "Connection success";
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Klaida: " + ex.Message + "\nNepavyko prisijungti prie duombazės");
+            }
+
             return pranesimas;
         }
 
-
-
-
         private void txtVardas_TextChanged(object sender, EventArgs e)
         {
-           
         }
 
         private void lblVardas_Click(object sender, EventArgs e)
         {
-
         }
-
-        
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
-
         }
     }               
 }

@@ -74,6 +74,8 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             allReset();
+            txtGen.Hide();
+            btnSecret.Show();
          
             HashSet<int> setas1 = skaiciausGeneratorius();
             var outGen = string.Join("", setas1);
@@ -113,7 +115,7 @@ namespace WindowsFormsApplication2
                     MessageBox.Show("Atspejote is " + countFinal + " bandymu" + "\nJusu laikas: " + laikas);
 
                     // Sukuriamas registracijos Form2 objektas ir jis atidaroma registracijos formos langas
-                    registrationForm frm2 = new registrationForm(laikas, countFinal);
+                    registrationForm frm2 = new registrationForm(laikas, countFinal, skaitDydis);
                     frm2.Show();
                     count = 1;
                     allReset();
@@ -153,7 +155,14 @@ namespace WindowsFormsApplication2
             }
         }
 
-                        //METODAI
+        // Mygtukas Atskleisti paslapti
+        private void btnSecret_Click(object sender, EventArgs e)
+        {
+            txtGen.Show();
+            btnSecret.Hide();
+        }
+
+        //METODAI
 
         // Metodas Random Skaiciaus Generatorius
         private HashSet<int> skaiciausGeneratorius()
@@ -239,6 +248,7 @@ namespace WindowsFormsApplication2
         private void label4_Click(object sender, EventArgs e)
         {
         }
-       
+
+      
     }
 }
