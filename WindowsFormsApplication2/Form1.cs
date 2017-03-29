@@ -39,7 +39,7 @@ namespace WindowsFormsApplication2
             allReset();
             skaitDydis = 6;
             skaitMax = 999999;
-            MessageBox.Show("Paspauskite mygtuka 'Pradeti'");
+            MessageBox.Show("Paspauskite mygtuką 'Pradėti'");
         }
 
         //Radio button 4 -> ijungia 4 skaitmenu skaiciaus zaidima
@@ -93,9 +93,9 @@ namespace WindowsFormsApplication2
             txtGuess.Select(); // permeta kursoriu i spejimo lageli
 
             // patikrinam ar kas nors ivesta 
-            if (txtGen.Text == "")
+            if (txtGen.Text == "" || txtGen.Text == "Paslaptis")
             {
-                MessageBox.Show("Paspauskite mygtuka 'Pradeti'");
+                MessageBox.Show("Paspauskite mygtuka 'Pradėti'");
             }
 
             // patikrinam ar teisingo ilgio ivestas skaicius
@@ -112,7 +112,7 @@ namespace WindowsFormsApplication2
                     _ticks = 0;
                     string laikas = stopWatch.Elapsed.Minutes.ToString("00") + " : " + stopWatch.Elapsed.Seconds.ToString("00");
                     string countFinal = count.ToString();
-                    MessageBox.Show("Atspejote is " + countFinal + " bandymu" + "\nJusu laikas: " + laikas);
+                    MessageBox.Show("Atspėjote iš " + countFinal + " bandymų" + "\nJūsų laikas: " + laikas);
 
                     // Sukuriamas registracijos Form2 objektas ir jis atidaroma registracijos formos langas
                     registrationForm frm2 = new registrationForm(laikas, countFinal, skaitDydis);
@@ -137,7 +137,7 @@ namespace WindowsFormsApplication2
                     }
 
                     // I tarpiniu resulatatu langelius isvedame tarpinius rezultatus
-                    txtResult.Text = "Atspeta: " + n;
+                    txtResult.Text = "Atspėjote: " + n;
                     txtResult2.Text = "Savo vietoje: " + m;
 
                     // I visu resulatatu saraso langa isvedame tarpinius rezultatus
@@ -151,7 +151,7 @@ namespace WindowsFormsApplication2
             else
             // Jeigu skaicius neteisingo ilgio, prasome ivesti teisingo ilgio skaiciu
             {
-                MessageBox.Show("Iveskite " + skaitDydis + " skaitmenu skaiciu");
+                MessageBox.Show("Įveskite " + skaitDydis + " skaitmenų skaičių");
             }
         }
 
@@ -201,14 +201,14 @@ namespace WindowsFormsApplication2
         // Menu punktas Help -> parodo zaidimo taisykles
         private void zaistiDarKartaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string help = "Žaidimo tikslas atspėti kompiuterio sugeneruotą skaičių. Tam reikia skirti kuo mažiau bandymų ir laiko.\nGalima pasirinkti 4-ių arba 6-ių skaitmenų skaičių. \nVisi skaitmenys skaičiuje yra skirtingi, t.y skaičiaus 1123 negali būti.\n\nSĖKMĖS!";
+            string help = "Žaidimo tikslas - atspėti kompiuterio sugeneruotą skaičių ir tam reikia skirti kuo mažiau bandymų ir laiko.\nGalima pasirinkti 4-ių arba 6-ių skaitmenų skaičių. \nVisi skaitmenys skaičiuje yra skirtingi, t.y skaičiaus 1123 negali būti.\n Po kiekvieno spėjimo parodoma, kiek skaitmenų iš viso skaičiaus atspėjote ir keli iš jų yra teisingoje vietoje. Šie rezultatai kaupiasi rezultatų lentelėje. \n\nSĖKMĖS!";
             MessageBox.Show(help);
         }
 
         // Menu punktas Exit -> uzdaro visa programa
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Ar norite zaidima baigti?", "Zaidimo pabaigimas", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Ar norite žaidimą baigti?", "Žaidimo pabaigimas", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Application.Exit();
             }

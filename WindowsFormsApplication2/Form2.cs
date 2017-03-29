@@ -22,7 +22,7 @@ namespace WindowsFormsApplication2
             InitializeComponent();
         }
 
-        // susikuriam konstruktoriu kad persuoti duomenis is Form1
+        // susikuriam konstruktoriu kad perduoti duomenis is Form1
         public registrationForm(string timeFinal, string countFinal, int skaitDydis)
         {
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace WindowsFormsApplication2
             }
             else if (listNames.Items.Count != 0)
             {
-                btnIssaugoti.Text = "Uzdaryti";
+                btnIssaugoti.Text = "Uždaryti";
                 MessageBox.Show("Jusu rezultatai jau išsaugoti");
                 this.Close();
             }
@@ -90,7 +90,7 @@ namespace WindowsFormsApplication2
                     numberSize = "user4";
                     break;
             }
-            string pranesimas = "Connection Failed";
+            string pranesimas = "Prisjungti nepavyko";
             string connectionString = "datasource=127.0.0.1; port=3306; username=root; password=;";
             string Query1 = "INSERT INTO testuser." + numberSize + " (Name, Time, Count) values ('" + name + "', '" + time + "', '" + count + "');";
             string Query2 = "SELECT * FROM testuser." + numberSize +" order by Count asc, Time;";
@@ -125,7 +125,7 @@ namespace WindowsFormsApplication2
                     pranesimas = "Connection success";
                 }
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show("Klaida: " + ex.Message + "\nNepavyko prisijungti prie duombazės");
             }
