@@ -160,6 +160,7 @@ namespace WindowsFormsApplication2
         {
             txtGen.Show();
             btnSecret.Hide();
+            // Nedidelis pakeitimas
         }
 
         //METODAI
