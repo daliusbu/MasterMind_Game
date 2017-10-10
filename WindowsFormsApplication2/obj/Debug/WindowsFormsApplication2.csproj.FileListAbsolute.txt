@@ -42,3 +42,18 @@ D:\0 User Dalius\My desktop D\GIT\Mastermind\WindowsFormsApplication2\WindowsFor
 D:\0 User Dalius\My desktop D\GIT\Mastermind\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
 D:\0 User Dalius\My desktop D\GIT\Mastermind\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 D:\0 User Dalius\My desktop D\GIT\Mastermind\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\Database.mdf
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\Database_log.ldf
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.pdb
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\MySql.Data.dll
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\Google.Protobuf.dll
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\bin\Debug\MySql.Data.xml
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.MasterMind.resources
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.registrationForm.resources
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
+D:\LIBRARIES\My Git\MasterMind\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
